@@ -1,0 +1,72 @@
+{% capture src_url %}{{ 'sectiondemo.js' | asset_url }}{% endcapture %}
+{% render 'script', src: src_url, priority: 'normal', type: "defer" %}
+
+<section class="py-8">
+    {% for block in section.blocks %}
+    <div class="container px-4 mx-auto">
+        <div class="px-7 py-6 bg-indigo-500 rounded">
+            <div class="flex flex-wrap">
+                <div class="w-full md:w-1/2 pt-6 mb-10 md:mb-0">
+                    <p class="mb-8 md:mb-16 text-sm font-medium text-indigo-100">{{ block.settings.m_title }}</p>
+                    <a class="flex items-center text-white font-medium" href="{{ block.settings.m_url }}">
+                        <span>{{ block.settings.m_description }}</span>
+                    </a>
+                </div>
+                <div class="w-full md:w-1/2 flex items-center">
+                    <img class="desktop-img" width="1440" height="500" loading="lazy"
+                        src="{{ block.settings.img_banner_id | img_url: width: 1500 }}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+{% schema %}
+{
+"name": "Section Demo",
+"tag": "section",
+"class": "section",
+"blocks": [
+{
+"name": "Banner Demo",
+"type": "m_banner",
+"limit": 3,
+"settings": [
+{
+"type": "image_picker",
+"id": "img_banner_id",
+"label": "Banner Image Demo"
+},
+{
+"type": "image_picker",
+"id": "img_banner_id_mb",
+"label": "Banner Image Mobile"
+},
+{
+"type": "text",
+"id": "m_title",
+"default": "Title",
+"label": "Title"
+},
+{
+"type": "text",
+"id": "m_description",
+"default": "Description",
+"label": "Description"
+},
+{
+"type": "url",
+"id": "m_url",
+"label": "Link Url"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Section Demo"
+}
+]
+}
+{% endschema %}
